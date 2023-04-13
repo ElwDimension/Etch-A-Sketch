@@ -3,7 +3,11 @@ let grid=5;
 
 //set up container for DOM shenanigans
 const container=document.querySelector('#container');
+
 createGrid(grid);
+
+const btn=document.querySelector('#remove');
+btn.addEventListener('click',removeGrid);
 
 //function for creating grid using user input
 function createGrid(grid){
@@ -27,3 +31,10 @@ function createGrid(grid){
         }
     }
 }    
+
+function removeGrid(){
+    const list=document.getElementById("container");
+    while (list.hasChildNodes()) {
+        list.removeChild(list.firstChild);
+      }
+}
