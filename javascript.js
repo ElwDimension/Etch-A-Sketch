@@ -1,5 +1,6 @@
 //ask user for input here, hardcoding a number for now
-let grid=5;
+let grid=16;
+let ink="black";
 
 //set up container for DOM shenanigans
 const container=document.querySelector('#container');
@@ -7,7 +8,7 @@ const container=document.querySelector('#container');
 createGrid(grid);
 
 const btn=document.querySelector('#remove');
-btn.addEventListener('click',removeGrid);
+btn.addEventListener('click',resetGrid);
 
 //function for creating grid using user input
 function createGrid(grid){
@@ -17,6 +18,9 @@ function createGrid(grid){
         element.className="column";
         element.style.display="flex";
         element.style.flexDirection="column";
+        element.style.width="100%";
+        element.style.height="100%";
+        element.style.flexgrow=1;
         container.appendChild(element);
     }
 
@@ -25,16 +29,27 @@ function createGrid(grid){
         for(let j=0;j<grid;j++){
             let board = document.createElement('div');
             board.className="sketch";
+            board.textContent=" ";
+            board.style.display="flex";
+            board.style.width="100%";
+            board.style.height="100%";
             board.style.backgroundColor="pink";
-            board.textContent="box";
+            board.addEventListener('mouseover',changeColor);
             columns[i].appendChild(board);
+            
         }
-    }
+    }  
 }    
 
-function removeGrid(){
+function resetGrid(){
     const list=document.getElementById("container");
     while (list.hasChildNodes()) {
         list.removeChild(list.firstChild);
       }
+
+     createGrid(grid); 
+}
+
+function changeColor(){
+    this.style.backgroundColor="black";
 }
