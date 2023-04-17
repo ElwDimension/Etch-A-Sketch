@@ -7,7 +7,7 @@ const container=document.querySelector('#container');
 
 createGrid(grid);
 
-const btn=document.querySelector('#remove');
+const btn=document.querySelector('#reset');
 btn.addEventListener('click',resetGrid);
 
 //function for creating grid using user input
