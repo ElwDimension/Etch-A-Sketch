@@ -1,14 +1,21 @@
-//ask user for input here, hardcoding a number for now
+//set up inital grid size and color of mouseover
 let grid=16;
 let ink="black";
 
 //set up container for DOM shenanigans
 const container=document.querySelector('#container');
 
+//create initial grid
 createGrid(grid);
 
+//sets up reset button to create new grids
 const btn=document.querySelector('#reset');
 btn.addEventListener('click',resetGrid);
+
+//sets up user input textbox and button to change grid size
+const size=document.querySelector('#gridSize');
+const sizeBtn=document.querySelector('#gridSizeBtn');
+sizeBtn.addEventListener('click',changeSize);
 
 //function for creating grid using user input
 function createGrid(grid){
@@ -35,8 +42,7 @@ function createGrid(grid){
             board.style.height="100%";
             board.style.backgroundColor="pink";
             board.addEventListener('mouseover',changeColor);
-            columns[i].appendChild(board);
-            
+            columns[i].appendChild(board);            
         }
     }  
 }    
@@ -52,4 +58,17 @@ function resetGrid(){
 
 function changeColor(){
     this.style.backgroundColor="black";
+}
+
+function changeSize(){
+    let input=size.value;
+    console.log(input);
+    if(input==null || input<1 || input>99){
+        console.log("ERROR");
+    }
+    else{
+        input=size.valueAsNumber;
+        grid=input;
+        resetGrid();
+    }
 }
