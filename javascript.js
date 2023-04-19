@@ -1,6 +1,7 @@
 //set up inital grid size and color of mouseover
 let grid=16;
 let ink="black";
+let mode="";
 
 //set up container for DOM shenanigans
 const container=document.querySelector('#container');
@@ -17,9 +18,26 @@ const size=document.querySelector('#gridSize');
 const sizeBtn=document.querySelector('#gridSizeBtn');
 sizeBtn.addEventListener('click',changeSize);
 
+//set up color selection button for users to draw in the color they select
+const colorBtn=document.querySelector('#colorPick');
+colorBtn.addEventListener('click',function(){
+    mode="color";
+});
+
+//set up button to color in rainbow
+const rainbowBtn=document.querySelector('#rainbow');
+rainbowBtn.addEventListener('click',function(){
+    mode="rainbow";
+});
+
+//set up button to darken colors 
+const darkBtn=document.querySelector('#darken');
+darkBtn.addEventListener('click',function(){
+    mode="darken";
+});
+
 //function for creating grid using user input
 function createGrid(grid){
-
     for (let i=0;i<grid;i++){
         let element = document.createElement('div');
         element.className="column";
@@ -53,11 +71,24 @@ function resetGrid(){
         list.removeChild(list.firstChild);
       }
 
-     createGrid(grid); 
+     createGrid(grid);
+     mode="";
 }
 
 function changeColor(){
-    this.style.backgroundColor="black";
+    if(mode=="rainbow"){
+        let r=Math.floor(Math.random() * 256);
+        let g=Math.floor(Math.random() * 256);
+        let b=Math.floor(Math.random() * 256);
+        this.style.backgroundColor=`rgb(${r}, ${g}, ${b})`;
+    }
+    else if(mode=="color"){
+        this.style.backgroundColor=colorBtn.value;
+    }
+    else{
+        this.style.backgroundColor="black";
+    }
+    
 }
 
 function changeSize(){
