@@ -59,6 +59,7 @@ function createGrid(grid){
             board.style.width="100%";
             board.style.height="100%";
             board.style.backgroundColor="pink";
+            
             board.addEventListener('mouseover',changeColor);
             columns[i].appendChild(board);            
         }
@@ -84,6 +85,9 @@ function changeColor(){
     }
     else if(mode=="color"){
         this.style.backgroundColor=colorBtn.value;
+    }
+    else if(mode=="darken"){
+        this.style.backgroundColor="#ff0000ff";
     }
     else{
         this.style.backgroundColor="black";
